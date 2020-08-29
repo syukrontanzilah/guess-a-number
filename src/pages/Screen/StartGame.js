@@ -29,20 +29,32 @@ const StartGame = (props) => {
         Keyboard.dismiss()
     }
 
+    const Avatar = () => {
+        if (selectedNumber >= 30 && selectedNumber <= 70) {
+            return <Image source={require('../../asset/icon/Nussa_Bio_1.png')}
+                style={{ height: 100, width: 50, marginRight: 20 }} />
+        } if (selectedNumber < 30) {
+            return <Image source={require('../../asset/icon/rara.png')}
+                style={{ height: 100, width: 50, marginRight: 20 }} />
+        } else {
+            return <Image source={require('../../asset/icon/nussa-rara.jpg')}
+                style={{ height: 100, width: 80, marginRight: 20 }} />
+        }
+    }
+
     let confirmedOutput
     if (confirm) {
         confirmedOutput = (
             <Card style={styles.summary}>
-                <Text>Kamu memilih</Text>
-                <View style={{flexDirection:'row', marginVertical:20}}>
-                    <Image source={require('../../asset/icon/Nussa_Bio_1.png')} 
-                    style={{height:100, width:50, marginRight:10}}/>
-                     <NumberContainer>
-                   {selectedNumber}
-               </NumberContainer>
+                <Text>Kamu memilih :</Text>
+                <View style={{ flexDirection: 'row', marginVertical: 20, paddingHorizontal: 20 }}>
+                    <Avatar />
+                    <NumberContainer>
+                        {selectedNumber}
+                    </NumberContainer>
                 </View>
-              
-               <Button title="Start Game" color="green"/>
+
+                <Button title="Start Game" color="green" onPress={()=> props.onStartGame(selectedNumber)} />
             </Card>
         )
     }
@@ -117,9 +129,9 @@ const styles = StyleSheet.create({
     button: {
         width: 80
     },
-    summary:{
+    summary: {
         marginTop: 20,
-        alignItems:'center'
+        alignItems: 'center',
 
     }
 })
