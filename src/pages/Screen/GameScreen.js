@@ -38,12 +38,20 @@ const GameScreen = (props) => {
     }
 
     const Avatar = () => {
-        if (currentGuess > 0 && currentGuess < 30) {
+        if (currentGuess > 0 && currentGuess < 20) {
             return <Image source={require('../../asset/icon/Nussa_Bio_1.png')}
                 style={{ height: 100, width: 50, marginRight: 20 }} />
-        } if (currentGuess >= 30 && currentGuess <= 70) {
+        } if (currentGuess >= 20 && currentGuess < 40) {
             return <Image source={require('../../asset/icon/rara.png')}
                 style={{ height: 100, width: 50, marginRight: 20 }} />
+        } 
+        if(currentGuess >=40 && currentGuess <60){
+           return <Image source={require('../../asset/icon/nusarara3.png')}
+                style={{ height: 100, width: 120, marginRight: 20 }} />
+        }
+        if(currentGuess >=60 && currentGuess <80){
+            return <Image source={require('../../asset/icon/kucing.jpg')}
+                 style={{ height: 40, width: 60, marginRight: 5, alignSelf:'flex-end', marginBottom:10 }} />
         }
         else {
             return <Image source={require('../../asset/icon/nussa-rara.jpg')}
