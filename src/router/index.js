@@ -8,7 +8,7 @@ const Router = () => {
     return (
         <Stack.Navigator
             headerMode="none"
-            initialRouteName='Splash'>
+            initialRouteName='Home'>
 
             <Stack.Screen
                 name='Splash'
