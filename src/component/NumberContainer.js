@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
         borderRadius:10,
         marginVertical:10,
         alignItems:'center',
-        justifyContent:'center'
+        justifyContent:'center',
+        backgroundColor:'wheat'
     },
     number:{
         color: colors.secondary,
-        fontSize:30
+        fontSize:50
     }
 
 })

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
 import Card from '../../component/Card'
 import colors from '../../util/colors'
 import Input from '../../component/Input'
@@ -34,9 +34,14 @@ const StartGame = (props) => {
         confirmedOutput = (
             <Card style={styles.summary}>
                 <Text>Kamu memilih</Text>
-               <NumberContainer>
+                <View style={{flexDirection:'row', marginVertical:20}}>
+                    <Image source={require('../../asset/icon/Nussa_Bio_1.png')} 
+                    style={{height:100, width:50, marginRight:10}}/>
+                     <NumberContainer>
                    {selectedNumber}
                </NumberContainer>
+                </View>
+              
                <Button title="Start Game" color="green"/>
             </Card>
         )
