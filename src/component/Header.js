@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import colors from '../util/colors'
+import { fonts } from '../util/fonts'
 
 const Header = (props) => {
     return (
@@ -23,6 +24,8 @@ const styles = StyleSheet.create({
     },
     title: {
         color: '#fff',
-        fontSize: 18
+        fontSize: 25,
+        fontFamily: fonts.tiki,
+        letterSpacing: 3
     }
 })

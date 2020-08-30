@@ -114,11 +114,11 @@ const styles = StyleSheet.create({
     },
     input: {
         color: '#f4287b',
-        fontSize: 35,
+        fontSize: 30,
         height: 50,
         maxWidth: 150,
         textAlign: 'center',
-
+        
     },
     btnContainer: {
         flexDirection: 'row',
