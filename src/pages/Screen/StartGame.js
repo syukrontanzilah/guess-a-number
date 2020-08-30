@@ -4,6 +4,8 @@ import Card from '../../component/Card'
 import colors from '../../util/colors'
 import Input from '../../component/Input'
 import NumberContainer from '../../component/NumberContainer'
+import { fonts } from '../../util/fonts'
+import MyButton from '../../component/MyButton'
 
 const StartGame = (props) => {
     const [enterValue, setEnterValue] = useState('')
@@ -29,9 +31,10 @@ const StartGame = (props) => {
         Keyboard.dismiss()
     }
 
-    const Avatar = () => {
+    const Avatar = (props) => {
         if (selectedNumber >= 30 && selectedNumber <= 70) {
-            return <Image source={require('../../asset/icon/Nussa_Bio_1.png')}
+            return <Image
+                source={require('../../asset/icon/Nussa_Bio_1.png')}
                 style={{ height: 100, width: 50, marginRight: 20 }} />
         } if (selectedNumber < 30) {
             return <Image source={require('../../asset/icon/rara.png')}
@@ -46,15 +49,20 @@ const StartGame = (props) => {
     if (confirm) {
         confirmedOutput = (
             <Card style={styles.summary}>
-                <Text>Kamu memilih :</Text>
+                <Text style={{ fontFamily: fonts.happy, fontSize: 25, color: 'green' }}>Kamu memilih :</Text>
                 <View style={{ flexDirection: 'row', marginVertical: 20, paddingHorizontal: 20 }}>
                     <Avatar />
                     <NumberContainer>
                         {selectedNumber}
                     </NumberContainer>
                 </View>
-
-                <Button title="Start Game" color="green" onPress={()=> props.onStartGame(selectedNumber)} />
+                <MyButton
+                    style={{ backgroundColor: 'green' }}
+                    onPress={() => props.onStartGame(selectedNumber)}
+                >
+                    Start Game
+                </MyButton>
+                {/* <Button title="Start Game" color="green" onPress={() => props.onStartGame(selectedNumber)} /> */}
             </Card>
         )
     }
@@ -66,7 +74,7 @@ const StartGame = (props) => {
             <View style={styles.container}>
                 <Text style={styles.title}>Mulai Permainan</Text>
                 <Card style={styles.inputContainer}>
-                    <Text>Pilih angka</Text>
+                    <Text style={{ fontFamily: fonts.happy, fontSize: 25 }}>Pilih angka mu</Text>
                     <Input
                         value={enterValue}
                         onChangeText={numberInputHandler}
@@ -77,13 +85,14 @@ const StartGame = (props) => {
                         style={styles.input} />
                     <View style={styles.btnContainer}>
                         <View style={styles.button}>
-                            <Button title="Ubah" color={colors.secondary}
-                                onPress={resetInputHandler} />
+                            <MyButton
+                                style={{ backgroundColor: colors.secondary }}
+                                onPress={resetInputHandler}
+                            >Ubah</MyButton>
                         </View>
                         <View style={styles.button}>
-                            <Button title="OK" color={colors.primary}
-                                onPress={confirmInputHandler}
-                            />
+                            <MyButton onPress={confirmInputHandler}
+                            >OKe</MyButton>
                         </View>
                     </View>
                 </Card>
@@ -104,8 +113,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     title: {
-        fontSize: 20,
-        marginVertical: 12
+        fontSize: 25,
+        marginVertical: 12,
+        fontFamily: fonts.happy
     },
     inputContainer: {
         width: 300,
@@ -114,11 +124,12 @@ const styles = StyleSheet.create({
     },
     input: {
         color: '#f4287b',
-        fontSize: 30,
-        height: 50,
+        fontSize: 40,
+        height: 55,
         maxWidth: 150,
         textAlign: 'center',
-        
+        fontFamily: fonts.primary
+
     },
     btnContainer: {
         flexDirection: 'row',
@@ -127,7 +138,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 13
     },
     button: {
-        width: 80
+        width: 75
     },
     summary: {
         marginTop: 20,

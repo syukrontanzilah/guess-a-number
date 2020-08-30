@@ -3,6 +3,8 @@ import { StyleSheet, Text, View, Button, Alert, Image } from 'react-native'
 import NumberContainer from '../../component/NumberContainer';
 import Card from '../../component/Card';
 import colors from '../../util/colors';
+import { fonts } from '../../util/fonts';
+import MyButton from '../../component/MyButton';
 
 const generateRandomBetween = (min, max, exclude) => {
     min = Math.ceil(min);
@@ -23,13 +25,13 @@ const GameScreen = (props) => {
     const currentLow = useRef(1)
     const currentHight = useRef(100)
 
-    const {userChoice, onGameOver} = props;
+    const { userChoice, onGameOver } = props;
 
     useEffect(() => {
         if (currentGuess === userChoice) {
             onGameOver(rounds)
         }
-    }, [currentGuess, userChoice, onGameOver ])
+    }, [currentGuess, userChoice, onGameOver])
 
     const nextGuessHandler = (direction) => {
         if ((direction === 'lebih kecil' && currentGuess < props.userChoice) || (direction === 'lebih besar' && currentGuess > props.userChoice)) {
@@ -45,7 +47,7 @@ const GameScreen = (props) => {
             currentLow.current,
             currentHight.current,
             currentGuess
-            )
+        )
         setCurrentGuess(nextNumber)
         setRound(curRounds => curRounds + 1)
     }
@@ -74,23 +76,24 @@ const GameScreen = (props) => {
 
     return (
         <View style={styles.page}>
-            <Text>Tebakan kami: </Text>
+            <Text style={{ fontFamily: fonts.happy, fontSize: 25, color: colors.secondary, marginTop: 20 }}>Tebakan kami angkanya: </Text>
             <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                 <Avatar />
                 <NumberContainer>
                     {currentGuess}
                 </NumberContainer>
             </View>
-            <Text>Apakah benar ? </Text>
+            <Text style={{ fontFamily: fonts.tiki, fontSize: 30, color: colors.primary }}>Apakah benar?? </Text>
             <Card style={styles.buttonContainer}>
-                <Button
-                    title="Lebih kecil"
+
+                <MyButton
                     onPress={nextGuessHandler.bind(this, 'lebih kecil')}
-                    color={colors.secondary} />
-                <Button
-                    title="Lebih Besar"
-                    onPress={nextGuessHandler.bind(this, 'lebih besar')}
-                    color={colors.primary} />
+                    style={{ backgroundColor: colors.secondary }}>
+                    Lebih Kecil</MyButton>
+                <MyButton
+                    onPress={nextGuessHandler.bind(this, 'lebih besar')}>
+                    Lebih Besar</MyButton>
+
             </Card>
         </View>
     )

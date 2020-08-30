@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import colors from '../util/colors'
+import { fonts } from '../util/fonts'
 
 const NumberContainer = (props) => {
     return (
@@ -26,7 +27,8 @@ const styles = StyleSheet.create({
     },
     number:{
         color: colors.secondary,
-        fontSize:50
+        fontSize:50,
+        fontFamily: fonts.happy
     }
 
 })
