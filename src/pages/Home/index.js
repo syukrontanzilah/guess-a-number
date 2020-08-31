@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StatusBar, StyleSheet, View } from 'react-native'
+import { StatusBar, StyleSheet, View, Platform } from 'react-native'
 import Header from '../../component/Header'
 import colors from '../../util/colors'
 import StartGame from '../Screen/StartGame'
@@ -40,7 +40,7 @@ const Home = () => {
 
     return (
         <View style={styles.page}>
-            <StatusBar backgroundColor={colors.primary} />
+            <StatusBar backgroundColor={ Platform.OS === "android" ? colors.primary : colors.secondary} />
 
             <Header title="Tebak Angka" />
 

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { StyleSheet, Text, View, Button, Alert, Image, ScrollView, FlatList } from 'react-native'
+import { StyleSheet, Text, View, Button, Alert, Image, ScrollView, FlatList, Dimensions } from 'react-native'
 import NumberContainer from '../../component/NumberContainer';
 import Card from '../../component/Card';
 import colors from '../../util/colors';
@@ -19,9 +19,9 @@ const generateRandomBetween = (min, max, exclude) => {
 
 
 const renderListItem = (listLength, itemData) => (
-    <View style={{ padding: 10, marginVertical: 5, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center' }} >
-        <View style={{backgroundColor:'orange', width:30, height:30, alignItems:'center', justifyContent:'center', borderRadius:5}}>
-            <Text style={{color:'#fff', fontFamily: fonts.happy}}>#{listLength - itemData.index}</Text>
+    <View style={{ padding: 10, marginVertical: 5, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }} >
+        <View style={{ backgroundColor: 'orange', width: 30, height: 30, alignItems: 'center', justifyContent: 'center', borderRadius: 5 }}>
+            <Text style={{ color: '#fff', fontFamily: fonts.happy }}>#{listLength - itemData.index}</Text>
         </View>
 
         <View style={{ height: 35, width: 35, borderRadius: 35 / 2, backgroundColor: 'green', alignItems: 'center', justifyContent: 'center' }}>
@@ -98,7 +98,6 @@ const GameScreen = (props) => {
             </View>
             <Text style={{ fontFamily: fonts.tiki, fontSize: 30, color: colors.primary }}>Apakah benar?? </Text>
             <Card style={styles.buttonContainer}>
-
                 <MyButton
                     onPress={nextGuessHandler.bind(this, 'lebih kecil')}
                     style={{ backgroundColor: colors.secondary }}>
@@ -107,17 +106,17 @@ const GameScreen = (props) => {
                     onPress={nextGuessHandler.bind(this, 'lebih besar')}>
                     Lebih Besar</MyButton>
             </Card>
-            <View style={{ width: '50%', flex:1 }}>
+            <View style={{ width: '50%', flex: 1 }}>
                 {/* <ScrollView 
                 contentContainerStyle={{}}
                 showsVerticalScrollIndicator={false}>
                     {pastGuesses.map((guess, index) => renderListItem(guess, pastGuesses.length - index))}
                 </ScrollView> */}
                 <FlatList
-                showsVerticalScrollIndicator={false}
-                data ={pastGuesses}
-                keyExtractor={item => item}
-                renderItem={renderListItem.bind(this, pastGuesses.length)}
+                    showsVerticalScrollIndicator={false}
+                    data={pastGuesses}
+                    keyExtractor={item => item}
+                    renderItem={renderListItem.bind(this, pastGuesses.length)}
                 />
             </View>
 
@@ -137,8 +136,8 @@ const styles = StyleSheet.create({
     buttonContainer: {
         flexDirection: 'row',
         justifyContent: 'space-around',
-        marginTop: 10,
-        width: 300,
+        marginTop: Dimensions.get('window').height > 600 ? 20 : 5,
+        width: Dimensions.get('window').width > 350 ? '80%' : '90%',
         maxWidth: '80%',
 
     }
