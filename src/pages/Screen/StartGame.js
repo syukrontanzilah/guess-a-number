@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TextInput, Image, Button, TouchableWithoutFeedback, Keyboard, Alert } from 'react-native'
+import { StyleSheet, Text, View, TextInput, Image, Button, TouchableWithoutFeedback, Keyboard, Alert, Dimensions } from 'react-native'
 import Card from '../../component/Card'
 import colors from '../../util/colors'
 import Input from '../../component/Input'
@@ -118,8 +118,9 @@ const styles = StyleSheet.create({
         fontFamily: fonts.happy
     },
     inputContainer: {
-        width: 300,
-        maxWidth: '80%',
+        width: '80%',
+        maxWidth: '95%',
+        minWidth:300,
         alignItems: 'center',
     },
     input: {
@@ -138,7 +139,8 @@ const styles = StyleSheet.create({
         paddingHorizontal: 13
     },
     button: {
-        width: 75
+        // width: 75
+        width: Dimensions.get('window').width /5.5
     },
     summary: {
         marginTop: 20,
