@@ -8,7 +8,7 @@ const GameOver = (props) => {
     return (
         <View style={styles.page}>
             <Text style={styles.title}>Game Selesai...</Text>
-            <Text style={styles.title}>hp mu perlu {''}
+            <Text style={styles.title}>NUSA Rara perlu {''}
                 <Text style={{ fontSize: 30, color: colors.secondary }}>
                     {props.roundsNumber}
                 </Text>

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { StyleSheet, Text, View, Button, Alert, Image } from 'react-native'
+import { StyleSheet, Text, View, Button, Alert, Image, ScrollView, FlatList } from 'react-native'
 import NumberContainer from '../../component/NumberContainer';
 import Card from '../../component/Card';
 import colors from '../../util/colors';
@@ -17,11 +17,23 @@ const generateRandomBetween = (min, max, exclude) => {
     }
 }
 
+
+const renderListItem = (listLength, itemData) => (
+    <View style={{ padding: 10, marginVertical: 5, flexDirection: 'row', justifyContent: 'space-around', alignItems:'center' }} >
+        <View style={{backgroundColor:'orange', width:30, height:30, alignItems:'center', justifyContent:'center', borderRadius:5}}>
+            <Text style={{color:'#fff', fontFamily: fonts.happy}}>#{listLength - itemData.index}</Text>
+        </View>
+
+        <View style={{ height: 35, width: 35, borderRadius: 35 / 2, backgroundColor: 'green', alignItems: 'center', justifyContent: 'center' }}>
+            <Text style={{ fontFamily: fonts.happy, color: '#fff', fontSize: 18 }}>{itemData.item}</Text>
+        </View>
+    </View>
+)
+
 const GameScreen = (props) => {
-    const [currentGuess, setCurrentGuess] = useState(
-        generateRandomBetween(1, 100, props.userChoice)
-    )
-    const [rounds, setRound] = useState(0)
+    const initialGuess = generateRandomBetween(1, 100, props.userChoice)
+    const [currentGuess, setCurrentGuess] = useState(initialGuess)
+    const [pastGuesses, setPastGuesses] = useState([initialGuess.toString()])
     const currentLow = useRef(1)
     const currentHight = useRef(100)
 
@@ -29,7 +41,7 @@ const GameScreen = (props) => {
 
     useEffect(() => {
         if (currentGuess === userChoice) {
-            onGameOver(rounds)
+            onGameOver(pastGuesses.length)
         }
     }, [currentGuess, userChoice, onGameOver])
 
@@ -41,7 +53,7 @@ const GameScreen = (props) => {
         if (direction === 'lebih kecil') {
             currentHight.current = currentGuess
         } else {
-            currentLow.current = currentGuess;
+            currentLow.current = currentGuess + 1;
         }
         const nextNumber = generateRandomBetween(
             currentLow.current,
@@ -49,7 +61,8 @@ const GameScreen = (props) => {
             currentGuess
         )
         setCurrentGuess(nextNumber)
-        setRound(curRounds => curRounds + 1)
+        // setRound(curRounds => curRounds + 1)
+        setPastGuesses(curPastGuesses => [nextNumber.toString(), ...curPastGuesses]);
     }
 
     const Avatar = () => {
@@ -76,7 +89,7 @@ const GameScreen = (props) => {
 
     return (
         <View style={styles.page}>
-            <Text style={{ fontFamily: fonts.happy, fontSize: 25, color: colors.secondary, marginTop: 20 }}>Tebakan kami angkanya: </Text>
+            <Text style={{ fontFamily: fonts.happy, fontSize: 25, color: colors.secondary, marginTop: 20 }}>Tebakan NUSA Rara: </Text>
             <View style={{ flexDirection: 'row', marginVertical: 10 }}>
                 <Avatar />
                 <NumberContainer>
@@ -93,8 +106,21 @@ const GameScreen = (props) => {
                 <MyButton
                     onPress={nextGuessHandler.bind(this, 'lebih besar')}>
                     Lebih Besar</MyButton>
-
             </Card>
+            <View style={{ width: '50%', flex:1 }}>
+                {/* <ScrollView 
+                contentContainerStyle={{}}
+                showsVerticalScrollIndicator={false}>
+                    {pastGuesses.map((guess, index) => renderListItem(guess, pastGuesses.length - index))}
+                </ScrollView> */}
+                <FlatList
+                showsVerticalScrollIndicator={false}
+                data ={pastGuesses}
+                keyExtractor={item => item}
+                renderItem={renderListItem.bind(this, pastGuesses.length)}
+                />
+            </View>
+
         </View>
     )
 }
